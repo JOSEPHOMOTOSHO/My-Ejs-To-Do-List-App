@@ -21,8 +21,11 @@ router.get("/", function (req, res) {
 });
 //Post Request
 router.post("/", (req, res) => {
+    //save what was typed in the form
     let item = req.body.newItem;
+    //push it to our items variable
     items.push(item);
+    //redirect to home route
     res.redirect("/");
 });
 exports.default = router;
