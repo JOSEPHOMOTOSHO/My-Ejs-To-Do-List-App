@@ -30,6 +30,7 @@ router.get("/", function (req, res) {
             now = "Saturday";
             break;
         default:
+            console.log("Error: current day is equal to :" + currentDay);
     }
     res.render("list", { day: now });
 });

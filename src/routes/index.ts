@@ -28,7 +28,8 @@ router.get("/", function (req: Request, res: Response) {
     case 6:
       now = "Saturday";
       break;
-      default
+    default:
+      console.log("Error: current day is equal to :" + currentDay);
   }
   res.render("list", { day: now });
 });
