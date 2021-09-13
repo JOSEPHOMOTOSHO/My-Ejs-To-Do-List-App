@@ -32,6 +32,8 @@ router.get("/", function (req, res) {
         default:
             console.log("Error: current day is equal to :" + currentDay);
     }
+    //render what's in the list.ejs file thats in a default views folder and render the file while you assign
+    //the value of now to the day variable in list.ejs
     res.render("list", { day: now });
 });
 exports.default = router;
