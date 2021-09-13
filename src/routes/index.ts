@@ -1,39 +1,37 @@
 const express = require("express");
 const router = express.Router();
 import { Request, Response } from "express";
+
+interface optionsInterface {
+  weekday?: "long" | "short" | "narrow";
+  month?: "numeric" | "2-digit" | "long" | "short" | "narrow";
+  day?: "numeric" | "2-digit";
+}
+let items: string[] = [
+  "do robin wieruch React",
+  "be the best in node",
+  "become a king",
+];
 /* GET home page. */
 router.get("/", function (req: Request, res: Response) {
   let today = new Date();
-  let currentDay = today.getDay();
-  let now = "";
-  switch (currentDay) {
-    case 0:
-      now = "Sunday";
-      break;
-    case 1:
-      now = "Monday";
-      break;
-    case 2:
-      now = "Tuesday";
-      break;
-    case 3:
-      now = "Wednesday";
-      break;
-    case 4:
-      now = "Thursday";
-      break;
-    case 5:
-      now = "Friday";
-      break;
-    case 6:
-      now = "Saturday";
-      break;
-    default:
-      console.log("Error: current day is equal to :" + currentDay);
-  }
-  //render what's in the list.ejs file thats in a default views folder and render the file while you assign
-  //the value of now to the day variable in list.ejs
-  res.render("list", { day: now });
+  let options: optionsInterface = {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  };
+
+  //returns the date format like Monday, September 13
+  let now = today.toLocaleDateString("en-US", options);
+
+  res.render("list", { day: now, listitems: items });
+});
+
+//Post Request
+router.post("/", (req: Request, res: Response) => {
+  let item = req.body.newItem;
+  items.push(item);
+  res.redirect("/");
 });
 
 export default router;
